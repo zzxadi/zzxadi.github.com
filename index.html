@@ -7,7 +7,7 @@ title: zzxadi
   <h1>Blog Posts</h1>
   <ul class="posts">
     {% for post in site.posts %}
-      <li><span>01 Sep 2013</span> &raquo; <a href="http://zzxadi.github.io/2013/09/01/谁会不厌其烦的安慰那无知的少年.html">谁会不厌其烦的安慰那无知的少年</a></li>
+      <li><span>{{ post.date | date_to_string }}</span> &raquo; <a href="{{ post.url }}">{{ post.title }}</a></li>
     {% endfor %}
   </ul> 
 </div>
