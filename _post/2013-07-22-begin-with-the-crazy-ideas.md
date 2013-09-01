@@ -1,1 +1,0 @@
----layout: unposttitle: begin-with-the-crazy-ideas---
