@@ -1,0 +1,23 @@
+---
+layout: page
+title: Blogs
+header: Blogs
+group: navigation
+---
+{% include JB/setup %}
+
+{% for post in site.posts %}
+<div class="post-section">
+	<div>
+		<span class="post-date">{{ post.date | date_to_string }}</span>  
+		<span class="post-title">{{ post.title }}</span>  
+	</div>
+	<div class="post-cate-tag">
+		<span>Category: {{ post.category }}</span>
+		<span>Tags: {{ post.tags | array_to_sentence_string }}</span>
+	</div>
+	<div class="post-desc">
+		{{ post.description }}<a href="{{ BASE_PATH }}{{ post.url }}">继续阅读 >></a>   
+	</div>
+</div>
+{% endfor %}
