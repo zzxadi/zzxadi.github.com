@@ -5,12 +5,11 @@
 
 <head>
 	<meta charset="utf-8">
-	<title>OpenStack Ceilometer 简介 - Rocky Way</title>
-	<meta name="author" content="Rocky">
+	<title>Blog Archives - zzxadi</title>
+	<meta name="author" content="zzxadi">
 
 	
-	<meta name="description" content="OpenStack Ceilometer 简介 Ceilometer是OpenStack中的一个子项目，它像一个漏斗一样，能把OpenStack内部发生
-的几乎所有的事件都收集起来，然后为计费和监控以及其它服务提供数据支撑。 Why we need it &hellip;">
+	<meta name="description" content=" zzxadi blog ">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,9 +17,9 @@
   <meta name="MobileOptimized" content="320">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<link href="/atom.xml" rel="alternate" title="Rocky Way" type="application/atom+xml">
+	<link href="/atom.xml" rel="alternate" title="zzxadi" type="application/atom+xml">
 	
-	<link rel="canonical" href="http://3dx2y.github.io/blog/2013/08/22/ceilomter-introduction/">
+	<link rel="canonical" href="http://3dx2y.github.io/blog/archives/">
         <link href="/favicon.png" rel="shortcut icon">
 	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
 	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
@@ -39,11 +38,11 @@
 			<header id="header" class="inner"><div class="profilepic">
 	<script src="/javascripts/md5.js"></script>
 	<script type="text/javascript">
-            document.write("<img src='http://www.gravatar.com/avatar/" + MD5("yugsuo@gmail.com") + "?s=160' alt='Profile Picture' style='width: 160px;' />");
+            document.write("<img src='http://www.gravatar.com/avatar/" + MD5("zhazhexio@gmail.com") + "?s=160' alt='Profile Picture' style='width: 160px;' />");
 	</script>
 </div>
 <hgroup>
-  <h1><a href="/">Rocky Way</a></h1>
+  <h1><a href="/">zzxadi</a></h1>
   
 </hgroup>
 
@@ -56,12 +55,10 @@
 <nav id="sub-nav">
 	<div class="social">
 		
+	
 		
 		
-		<a class="twitter" href="http://twitter.com/wayofseeking" title="Twitter">Twitter</a>
-		
-		
-		<a class="github" href="https://github.com/3dx2y" title="GitHub">GitHub</a>
+		<a class="github" href="https://github.com/zzxadi" title="GitHub">GitHub</a>
 		
 		
 		
@@ -70,10 +67,10 @@
 		
 		
                 
-                <a class="weibo" href="http://weibo.com/yugsuo" title="Weibo">Weibo</a>
+                <a class="weibo" href="http://weibo.com/zzxadi" title="Weibo">Weibo</a>
                 
 		
-		<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+	
 		
 	</div>
 </nav>
@@ -85,245 +82,32 @@
 				
 			
 			<div class="mid-col-container">
-				<div id="content" class="inner"><article class="post" itemscope itemtype="http://schema.org/BlogPosting">
-	<h1 class="title" itemprop="name">OpenStack Ceilometer 简介</h1>
-	<div class="entry-content" itemprop="articleBody"><p><a href="https://launchpad.net/ceilometer">Ceilometer</a>是<a href="https://www.openstack.org/">OpenStack</a>中的一个子项目，它像一个漏斗一样，能把OpenStack<strong>内部</strong>发生
-的几乎所有的事件都收集起来，然后为<strong>计费</strong>和<strong>监控</strong>以及其它服务提供数据支撑。</p>
+				<div id="content" class="inner"><div itemscope itemtype="http://schema.org/Blog">
 
-<!--more-->
+	
 
 
-<h2>Why we need it</h2>
+	
+	
+	<section class="archives"><h1 class="year">2013</h1>
 
-<p>OpenStack作为一个开源的IaaS平台，发展的越来越快，越来越多的公司在基于OpenStack做自己的公有云平台，
-而作为公有云，计量和监控，这两个基础的服务是必不可少的。计量是为了获取平台中用户对各种资源的使用情况，
-监控是为了确保资源是处于健康的状态，由于之前OpenStack没有提供这两个服务，所以很多公司都将开发这两个
-服务作为OpenStack产品化的一部分。</p>
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2013-08-22T14:56:00+08:00" itemprop="datePublished">Aug 22</time></span>
+		<br>
+		<span class="tags">
 
-<p>为了顺应OpenStack的发展，并且避免做重复的工作，于是Ceilometer诞生了。</p>
-
-<h2>History and Mission</h2>
-
-<p><em>History</em></p>
-
-<ul>
-<li>Ceilometer项目开始于2012年的4,5月份，由 <a href="http://julien.danjou.info/">Julien Danjou</a>, <a href="http://www.dreamhost.com/">Dreamhost</a> 和 <a href="http://www.canonical.com/">Canonical</a>等发起。</li>
-<li>经过6个月的开发，在2012年的10月份，伴随着Folsom的发布，Ceilometer也发布了它的<a href="https://lists.launchpad.net/openstack/msg17410.html">v1.0版本</a>，在
-第一个版本中，Ceilometer主要实现了对一些重要数据的计量，包括Compute, Network, Memory, CPU, Image,
-Volume等，并且提供了REST API。</li>
-<li>在2013年的2月份，Ceilometer完成了由Incubation到Integrated的<a href="http://eavesdrop.openstack.org/meetings/tc/2013/tc.2013-02-19-20.02.html">转变</a>，这意味着Ceilometer将作为OpenStack
-发行版的一部分而发布。</li>
-<li>在Grizzly版中，Ceilometer添加了对Swift的支持，增加了SQLAlchemy作为Storage Backend，开发了<a href="https://blueprints.launchpad.net/ceilometer/+spec/multi-publisher">Multi Publisher</a>，
-并且发布了<a href="http://docs.openstack.org/developer/ceilometer/webapi/v2.html">V2</a>版本的API。</li>
-<li>现在Havana中，Ceilometer已经发布了2个milestone，主要增加了HBase作为Storage Backend，Alarm功能也基本完成，
-并且增加了<a href="https://blueprints.launchpad.net/ceilometer/+spec/udp-publishing">UDP Publisher</a>作为取代RPC发送消息的第二选择，更加高效。正在开发的havana-3，一个重要的新功能是
-又增加了DB2作为Storage Backend.</li>
-</ul>
-
-
-<p><em>Mission</em></p>
-
-<p>Ceilometer的使命经过一次变化，在项目提出之初，对它的定位就只是专注于计量，为计费而生。我们可以从它
-v1.0的Mission看出：</p>
-
-<blockquote><p>Focused only on metering for billing:</p>
-
-<p>Ceilometer aims to deliver a unique point of contact for billing systems to
-acquire all counters they need to establish customer billing, across all current
-and future OpenStack components.The delivery of counters must be traceable
-and auditable, the counters must be easily extensible to support new projects,
-and agents doing data collections should be independent of the overall system.</p></blockquote>
-
-<p>但是Ceilometer收集的是<strong>有用的数据</strong>，我们都知道数据的价值，所以随着Ceilometer的发展，对它的需求也在不断的增长，
-除了计费之外，像监控、Autoscalling、数据统计分析、benchmarking等都需要这些数据。所以从Grizzly开始，Ceilometer
-扩展了它的目标，不仅仅局限在计量和计费上，又由于Ceilometer的扩展性很强，很容易通过扩展去满足这些需求。</p>
-
-<p>下面是Ceilometer新的Mission:</p>
-
-<blockquote><p>Cover measurement in general:</p>
-
-<p>This project aims to become the infrastructure to collect measurements within
-OpenStack so that no two agents would need to be written to collect the same data.
-Its primary targets are monitoring and metering, but the framework should be
-easily expandable to collect for other needs. To that effect, Ceilometer should
-be able to share collected data with a variety of consumers.</p></blockquote>
-
-<h2>Core Architecture</h2>
-
-<p>Ceilometer收集的是OpenStack内部各个服务(nova, neutron, cinder等)，以及将来很多未知的服务的信息，这个基本的
-需求决定了它的架构必须是灵活可扩展的，因此，Ceilometer采用了一种“微内核”的架构，通过插件的机制来实现扩展。</p>
-
-<p>这里不得不说一下它的设计者<a href="http://doughellmann.com/">Doug Hellmann</a>为此做出的努力，可扩展可以说是软件设计的一个基本特征，不同的项目
-有不同的实现方法，<a href="http://doughellmann.com/">Doug Hellmann</a>花了一年的时间，调研了很多项目的扩展机制，包括<a href="http://sphinx-doc.org/">Sphinx</a>, <a href="https://nose.readthedocs.org/en/latest/">Nose</a>,
-<a href="https://www.djangoproject.com/">Django</a>, <a href="http://www.sqlalchemy.org/">SQLAlchemy</a>, <a href="https://launchpad.net/nova">Nova</a>等，最终开发了Python的一个基于<a href="http://pythonhosted.org/distribute/setuptools.html">setuptools entry points</a>三方库<a href="http://stevedore.readthedocs.org/en/latest/">Stevedore</a>，
-并且使用<a href="http://stevedore.readthedocs.org/en/latest/">Stevedore</a>设计了Ceilometer的<a href="http://stevedore.readthedocs.org/en/latest/essays/pycon2013.html">插件机制</a>，现在<a href="http://stevedore.readthedocs.org/en/latest/">Stevedore</a>已经被OpenStack中的很多新的项目使用，
-nova中也有用到。</p>
-
-<p>下面是Ceilometer的核心架构图：</p>
-
-<p><img src="/assets/images/ceilometer-architecture.png" alt="ceilometer-design" /></p>
-
-<p>Ceilometer使用了两种收集数据的方式，一种是消费OpenStack各个服务内发出的notification消息(对应上图中的蓝色箭头)，一种
-是通过调用各个服务的API去主动的获取数据(对应上图中的黑色箭头)。为什么会需要两种方式呢？Ceilometer作为OpenStack内部
-notification的最大消费者，OpenStack内部发生的一些事件都会发出对应的notification消息，比如说创建和删除instance，这些
-信息是计量/计费的重要信息，因此第一种方式是Ceilometer第一数据来源，但是有些计量信息通过notification消息是获取不到的，
-比如说instance的CPU的运行时间，或者是CPU的使用率，这些信息不会通过notification消息发送出来，因此Ceilometer增加了第二种
-方式，周期性的调用相关的API去获取这些信息。</p>
-
-<p>Ceilometer由5个重要的组件以及一个Message Bus组成，简单介绍一下各个组件以及他们之间的关系：</p>
-
-<p>(1) <strong>Compute Agent</strong></p>
-
-<p>该组件用来收集计算节点上的信息，在每一个计算节点上都要运行一个Compute Agent，该Agent通过Stevedore管理了一组pollster插件，
-分别用来获取虚拟机的CPU, Disk IO, Network IO, Instance这些信息，值得一提的是这些信息大部分是通过调用Hypervisor的API来获取的，
-目前，Ceilometer仅提供了Libvirt的API。</p>
-
-<p>(2) <strong>Central Agent</strong></p>
-
-<p>Central Agent运行在控制节点上，它主要收集其它服务(Image, Volume, Objects, Network)的信息，实现逻辑和Compute Agent类似，但是
-是通过调用这些服务的REST API去获取这些数据的。</p>
-
-<p>(3) <strong>Collector</strong></p>
-
-<p>这个应该是最为核心的组件了，它的主要作用是监听Message Bus，将收到的消息以及相应的数据写入到数据库中，它是在核心架构中唯一一个
-能够对数据库进行写操作的组件。除此之外，它的另一个作用是对收到的其它服务发来的notification消息做本地化处理，然后再重新发送到
-Message Bus中去，随后再被其收集。</p>
-
-<p>目前，通过上面三个组件可以收集到的数据，参看<a href="http://docs.openstack.org/developer/ceilometer/measurements.html">这里</a>。</p>
-
-<p>(4) <strong><a href="http://docs.openstack.org/developer/ceilometer/install/dbreco.html">Storage</a></strong></p>
-
-<p>数据存储现在支持MongoDB, MySQL, Postgresql和HBase，现在H3又新增加了对DB2的支持，其中MongoDB是支持最好的。</p>
-
-<p>(5) <strong><a href="http://docs.openstack.org/developer/ceilometer/webapi/v2.html">REST API</a></strong></p>
-
-<p>像其它服务一样，Ceilometer也提供的是REST API，API是唯一一个能对数据库进行读操作的组件，虽然后来加入的Alarm API能够直接对数据库
-进行读写，但是Alarm应该是一个较为独立的功能，并且它的读写量也不大。</p>
-
-<p>(6) <strong>Message Bus</strong></p>
-
-<p>Message Bus是整个数据流的瓶颈，所有的数据都要经过Message Bus被Collector收集而存到数据库中，目前Message Bus采用RabbitMQ实现。</p>
-
-<p>(7) <strong>Pipeline</strong></p>
-
-<p>Pipeline虽然不是其中一个组件，但是也是一个重要的机制，它是Agent和Message Bus以及外界之间的桥梁，Agent将收集来的数据发送到pipeline中，
-在pipeline中，先经过一组transformer的处理，然后通过Multi Publisher发送出去，可以通过Message Bus发送到Collector，或者是发送到其它的
-地方。Pipeline是可配置的，Agent poll数据的时间间隔，以及Transformers和Publishers都是通pipeline.yaml文件进行配置。</p>
-
-<p>整体上看，Ceilometer对数据流的处理，给人一种大禹治水的感觉。</p>
-
-<h2>Roadmap and Status</h2>
-
-<p>可能由于Ceilometer的PTL <a href="http://julien.danjou.info/">Julien Danjou</a>比较强悍，Ceilometer从一开始就保持着非常好的项目进度，这也是它能够在很短的时间内，就由孵化项目
-成为OpenStack Core项目的原因之一，在Havana Release中，已经发布了2个Milestone，分别实现了10, 11个Blueprints，修复了60多个bug，正在进行
-的<a href="https://launchpad.net/ceilometer/+milestone/havana-3">Havana-3</a>，有27个Blueprints，其中大部分都保持着很好的进度。</p>
-
-<ul>
-<li>在H版中，一个重量级功能是给Ceilometer添加了Alarm功能，该Alarm的实现几乎跟AWS的CloudWatch Alarm一模一样。</li>
-<li>在H-1中，添加的<a href="https://blueprints.launchpad.net/ceilometer/+spec/meter-post-api">POST meter API</a>是一个重要的API，它的实现其实是打破了Ceilometer只局限在OpenStack内部服务的限制。可以直接通过该API
-向Ceilometer写入数据，而不是去写plugin，完成了Ceilometer由poll向poll+push的转变。</li>
-<li>在H-2中，实现的<a href="https://blueprints.launchpad.net/ceilometer/+spec/one-meter-per-plugin">One Meter per Pollster Plugin</a>简洁和规范化了Ceilometer的插件机制。</li>
-<li>在H-3中，也有很多BP会被实现，对API进行查询优化的<a href="https://blueprints.launchpad.net/ceilometer/+spec/api-group-by">Implements GROUP BY operations in API</a>，Pipeline的<a href="https://blueprints.launchpad.net/ceilometer/+spec/multi-dispatcher-enablement">Mutiple dispatcher enablement</a>,
-以及<a href="https://blueprints.launchpad.net/ceilometer/+spec/ibm-db2-support">db2 support</a>, <a href="https://blueprints.launchpad.net/ceilometer/+spec/pollster-runtime-configuration">Enable/Disable/Configure a pollster in runtime</a>，还有一个<a href="https://blueprints.launchpad.net/ceilometer/+spec/monitoring-physical-devices">Monitoring Physical Devices </a>的BP，它的实现会使
-Ceilometer向监控迈出重要一步，但是该BP中间换过一个Assignee，现在进度比较慢。</li>
-</ul>
-
-
-<h2>Metering or Monitoring</h2>
-
-<p>这个问题相信很多人都比较关心，而且也经常在邮件列表中被争论，在Ceilometer的Mission中清晰的写着<em>Its primary targets are monitoring and metering</em>，
-但是到底Ceiometer能用来做什么，为什么会有这些争论，先不忙下结论，先来看看别人是如何使用它的。</p>
-
-<p>Ceilometer的PTL <a href="http://julien.danjou.info/">Julien Danjou</a>是一个自由职业者，在<a href="http://julien.danjou.info/projects/">很多的开源社区</a>做过重要贡献，有<a href="http://julien.danjou.info/#references">很多公司</a>雇佣他做技术Leader，近期的包括<a href="http://enovance.com/">eNovance</a>,
-<a href="http://www.dreamhost.com/">DreamHost</a>, Talligent 和 <a href="http://eisti.fr/">EISTI</a>，而这些公司都使用Ceilometer来做billing systems，accounting solution for openstack，我想这应该是最有力的解释了。</p>
-
-<p>Ceilometer虽然在G版改变了它的Mission，但是在G版为这个Misson所做的工作集中在数据流的导入导出，而在H版才为Monitor做了一些工作，包括<a href="https://blueprints.launchpad.net/ceilometer/+spec/alarm-distributed-threshold-evaluation">Alarming</a>,
-<a href="https://blueprints.launchpad.net/ceilometer/+spec/monitoring-physical-devices">Monitoring Physical Devices </a>, <a href="https://blueprints.launchpad.net/ceilometer/+spec/ceilometer-cloudwatch-api">Ceilometer CloudWatch API</a>，目前，只有Alarming基本实现。虽然计量和监控他们的数据相似，但是对数据的要求却
-大相径庭，前者重点在<strong>Allocated</strong>，而后者重点在<strong>Utilization</strong>，<strong>Allocated</strong>这些信息能够很容易通过消费其它服务的notification消息来获得，比如通过
-捕获<em>compute.instance.create.start</em>, <em>compute.instance.delete.end</em>这些Event可以比较准确的知道一个instance是否创建成功，是否删除失败，但是像Instance
-的Memory Utilization, Disk Space Utilization这些数据是监控非常关心的，然而想获取这些数据却不容易，没有现成的API可以使用，写Agent，兼容性是个头疼的问题，
-这也是虚拟化平台监控的难点之一，由此在邮件列表中也引发的一次不愉快的<a href="https://lists.launchpad.net/openstack/msg24627.html">争论</a>。关于OpenStack的监控，<a href="http://www.mirantis.com/">Mirantis</a>给出了一个<a href="http://www.mirantis.com/blog/openstack-monitoring/">解决方案</a>，使用<a href="http://sflow.org/">sFlow</a>
-来解决虚拟资源监控的难点，有兴趣可以阅读一下。</p>
-
-<p>所以，最终的结论是Ceilometer做计量系统已经比较成熟，但是如果有能力hack它，使用它做监控也是可以的，毕竟它已经做了一些工作，而且有很好的扩展性，相信在
-I版会在这方面投入更多精力的。</p>
-
-<h2>Summary</h2>
-
-<p>本文粗略的描述了一下Ceilometer的过去和现在，它的整体架构，以及自己的一些观点，希望对大家有一些用处，欢迎交流讨论。:&ndash;)</p>
-
-<h2>Refrences</h2>
-
-<ol>
-<li><a href="https://launchpad.net/ceilometer">https://launchpad.net/ceilometer</a></li>
-<li><a href="https://www.openstack.org/">https://www.openstack.org/</a></li>
-<li><a href="http://www.dreamhost.com/">http://www.dreamhost.com/</a></li>
-<li><a href="http://julien.danjou.info/">http://julien.danjou.info/</a></li>
-<li><a href="http://www.canonical.com/">http://www.canonical.com/</a></li>
-<li><a href="https://lists.launchpad.net/openstack/msg17410.html">https://lists.launchpad.net/openstack/msg17410.html</a></li>
-<li><a href="http://eavesdrop.openstack.org/meetings/tc/2013/tc.2013-02-19-20.02.html">http://eavesdrop.openstack.org/meetings/tc/2013/tc.2013-02-19-20.02.html</a></li>
-<li><a href="http://docs.openstack.org/developer/ceilometer/webapi/v2.html">http://docs.openstack.org/developer/ceilometer/webapi/v2.html</a></li>
-<li><a href="https://blueprints.launchpad.net/ceilometer/+spec/udp-publishing">https://blueprints.launchpad.net/ceilometer/+spec/udp-publishing</a></li>
-<li><a href="https://blueprints.launchpad.net/ceilometer/+spec/multi-publisher">https://blueprints.launchpad.net/ceilometer/+spec/multi-publisher</a></li>
-<li><a href="http://doughellmann.com/">http://doughellmann.com/</a></li>
-<li><a href="http://stevedore.readthedocs.org/en/latest/">http://stevedore.readthedocs.org/en/latest/</a></li>
-<li><a href="http://stevedore.readthedocs.org/en/latest/essays/pycon2013.html">http://stevedore.readthedocs.org/en/latest/essays/pycon2013.html</a></li>
-<li><a href="http://docs.openstack.org/developer/ceilometer/architecture.html">http://docs.openstack.org/developer/ceilometer/architecture.html</a></li>
-<li><a href="http://sphinx-doc.org/">http://sphinx-doc.org/</a></li>
-<li><a href="https://nose.readthedocs.org/en/latest/">https://nose.readthedocs.org/en/latest/</a></li>
-<li><a href="https://www.djangoproject.com/">https://www.djangoproject.com/</a></li>
-<li><a href="http://www.sqlalchemy.org/">http://www.sqlalchemy.org/</a></li>
-<li><a href="https://launchpad.net/nova">https://launchpad.net/nova</a></li>
-<li><a href="http://pythonhosted.org/distribute/setuptools.html">http://pythonhosted.org/distribute/setuptools.html</a></li>
-<li><a href="http://docs.openstack.org/developer/ceilometer/install/dbreco.html">http://docs.openstack.org/developer/ceilometer/install/dbreco.html</a></li>
-<li><a href="http://docs.openstack.org/developer/ceilometer/measurements.html">http://docs.openstack.org/developer/ceilometer/measurements.html</a></li>
-<li><a href="https://launchpad.net/ceilometer/+milestone/havana-3">https://launchpad.net/ceilometer/+milestone/havana-3</a></li>
-<li><a href="https://blueprints.launchpad.net/ceilometer/+spec/meter-post-api">https://blueprints.launchpad.net/ceilometer/+spec/meter-post-api</a></li>
-<li><a href="https://blueprints.launchpad.net/ceilometer/+spec/one-meter-per-plugin">https://blueprints.launchpad.net/ceilometer/+spec/one-meter-per-plugin</a></li>
-<li><a href="https://blueprints.launchpad.net/ceilometer/+spec/api-group-by">https://blueprints.launchpad.net/ceilometer/+spec/api-group-by</a></li>
-<li><a href="https://blueprints.launchpad.net/ceilometer/+spec/multi-dispatcher-enablement">https://blueprints.launchpad.net/ceilometer/+spec/multi-dispatcher-enablement</a></li>
-<li><a href="https://blueprints.launchpad.net/ceilometer/+spec/ibm-db2-support">https://blueprints.launchpad.net/ceilometer/+spec/ibm-db2-support</a></li>
-<li><a href="https://blueprints.launchpad.net/ceilometer/+spec/pollster-runtime-configuration">https://blueprints.launchpad.net/ceilometer/+spec/pollster-runtime-configuration</a></li>
-<li><a href="https://blueprints.launchpad.net/ceilometer/+spec/monitoring-physical-devices">https://blueprints.launchpad.net/ceilometer/+spec/monitoring-physical-devices</a></li>
-<li><a href="http://julien.danjou.info/projects/">http://julien.danjou.info/projects/</a></li>
-<li><a href="http://enovance.com/">http://enovance.com/</a></li>
-<li><a href="http://eisti.fr/">http://eisti.fr/</a></li>
-<li><a href="http://julien.danjou.info/#references">http://julien.danjou.info/#references</a></li>
-<li><a href="https://blueprints.launchpad.net/ceilometer/+spec/ceilometer-cloudwatch-api">https://blueprints.launchpad.net/ceilometer/+spec/ceilometer-cloudwatch-api</a></li>
-<li><a href="https://blueprints.launchpad.net/ceilometer/+spec/alarm-distributed-threshold-evaluation">https://blueprints.launchpad.net/ceilometer/+spec/alarm-distributed-threshold-evaluation</a></li>
-<li><a href="https://lists.launchpad.net/openstack/msg24627.html">https://lists.launchpad.net/openstack/msg24627.html</a></li>
-<li><a href="http://www.mirantis.com/">http://www.mirantis.com/</a></li>
-<li><a href="http://www.mirantis.com/blog/openstack-monitoring/">http://www.mirantis.com/blog/openstack-monitoring/</a></li>
-<li><a href="http://sflow.org/">http://sflow.org/</a></li>
-</ol>
-
-</div>
-
+</span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2013/08/22/ceilomter-introduction/">OpenStack Ceilometer 简介</a></h1>
 </article>
 
-	<div class="share">
-	<div class="addthis_toolbox addthis_default_style ">
-	
-	
-	<a class="addthis_button_tweet"></a>
-	
-	
-	<a class="addthis_counter addthis_pill_style"></a>
-	</div>
-  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
-</div>
-
-
-
-<section id="comment">
-    <h1 class="title">Comments</h1>
-    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-</div>
-</section>
-</div>
+  </section>
+</div></div>
 			</div>
 			<footer id="footer" class="inner"><p>
-  Copyright &copy; 2013 - Rocky -
+  Copyright &copy; 2013 - zzxadi -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 
@@ -340,13 +124,10 @@ Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Sha
 
 
 <script type="text/javascript">
-      var disqus_shortname = 'wayofseeking';
+      var disqus_shortname = 'zzxadi';
       
         
-        // var disqus_developer = 1;
-        var disqus_identifier = 'http://3dx2y.github.io/blog/2013/08/22/ceilomter-introduction/';
-        var disqus_url = 'http://3dx2y.github.io/blog/2013/08/22/ceilomter-introduction/';
-        var disqus_script = 'embed.js';
+        var disqus_script = 'count.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
